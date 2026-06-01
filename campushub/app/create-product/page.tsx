@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/AuthContext";
 import DashboardLayout from "@/components/layout/DashboardLayout";
-import { SERVICE_CATEGORIES, Service } from "@/data/services";
+import { PRODUCT_CATEGORIES, Product } from "@/data/services";
 import { ArrowLeft } from "lucide-react";
 
-type PriceType = "hora" | "sesión" | "proyecto" | "fijo";
+type Condition = "nuevo" | "casi nuevo" | "usado" | "intercambio";
 
-export default function CreateServicePage() {
+export default function CreateProductPage() {
   const { user } = useAuth();
   const router = useRouter();
 
@@ -18,10 +18,9 @@ export default function CreateServicePage() {
     category: "",
     description: "",
     price: "",
-    priceType: "hora" as PriceType,
+    condition: "usado" as Condition,
   });
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -32,45 +31,42 @@ export default function CreateServicePage() {
   const handleSubmit = () => {
     setError("");
 
-    if (!form.title || !form.category || !form.description || !form.price) {
+    if (!form.title || !form.category || !form.description) {
       setError("Completa todos los campos");
       return;
     }
 
-    if (Number(form.price) <= 0) {
-      setError("El precio debe ser mayor a 0");
+    if (form.condition !== "intercambio" && (!form.price || Number(form.price) <= 0)) {
+      setError("Ingresa un precio válido o selecciona intercambio");
       return;
     }
 
-    if (!user) {
-      router.push("/login");
-      return;
-    }
+    if (!user) { router.push("/login"); return; }
 
-    setLoading(true);
-
-    const stored: Service[] = JSON.parse(
-      localStorage.getItem("services") || "[]"
+    const stored: Product[] = JSON.parse(
+      localStorage.getItem("products") || "[]"
     );
 
-    const newService: Service = {
+    const newProduct: Product = {
       id: Date.now(),
       title: form.title,
       category: form.category,
       description: form.description,
-      price: Number(form.price),
-      priceType: form.priceType,
+      price: form.condition === "intercambio" ? 0 : Number(form.price),
+      condition: form.condition,
       ownerName: user.name,
       ownerEmail: user.email,
       createdAt: new Date().toISOString(),
       rating: 0,
       reviewCount: 0,
-      type: "service",
+      type: "product",
     };
 
-    localStorage.setItem("services", JSON.stringify([...stored, newService]));
+    localStorage.setItem("products", JSON.stringify([...stored, newProduct]));
     router.push("/services");
   };
+
+  const isIntercambio = form.condition === "intercambio";
 
   return (
     <DashboardLayout>
@@ -84,8 +80,8 @@ export default function CreateServicePage() {
         </button>
 
         <div className="bg-white rounded-3xl p-8 border border-slate-200">
-          <h1 className="text-3xl font-bold text-slate-900">Publicar Servicio</h1>
-          <p className="text-slate-500 mt-1">Ofrece tus habilidades a la comunidad</p>
+          <h1 className="text-3xl font-bold text-slate-900">Publicar Producto</h1>
+          <p className="text-slate-500 mt-1">Vende o intercambia con la comunidad</p>
 
           <div className="mt-8 space-y-5">
 
@@ -95,7 +91,7 @@ export default function CreateServicePage() {
                 name="title"
                 value={form.title}
                 onChange={handleChange}
-                placeholder="Ej: Tutoría de Cálculo Diferencial"
+                placeholder="Ej: Cálculo - James Stewart 8va edición"
                 className="w-full border border-slate-200 rounded-xl p-3 text-sm outline-none focus:ring-2 focus:ring-blue-500 transition"
               />
             </div>
@@ -110,38 +106,42 @@ export default function CreateServicePage() {
                   className="w-full border border-slate-200 rounded-xl p-3 text-sm outline-none focus:ring-2 focus:ring-blue-500 bg-white"
                 >
                   <option value="">Selecciona una categoría</option>
-                  {SERVICE_CATEGORIES.map((c) => (
+                  {PRODUCT_CATEGORIES.map((c) => (
                     <option key={c} value={c}>{c}</option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">Precio (S/.) *</label>
-                <div className="flex gap-2">
-                  <input
-                    name="price"
-                    type="number"
-                    min="1"
-                    value={form.price}
-                    onChange={handleChange}
-                    placeholder="0"
-                    className="flex-1 border border-slate-200 rounded-xl p-3 text-sm outline-none focus:ring-2 focus:ring-blue-500 transition"
-                  />
-                  <select
-                    name="priceType"
-                    value={form.priceType}
-                    onChange={handleChange}
-                    className="border border-slate-200 rounded-xl p-3 text-sm outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                  >
-                    <option value="hora">/ hora</option>
-                    <option value="sesión">/ sesión</option>
-                    <option value="proyecto">/ proyecto</option>
-                    <option value="fijo">fijo</option>
-                  </select>
-                </div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">Estado *</label>
+                <select
+                  name="condition"
+                  value={form.condition}
+                  onChange={handleChange}
+                  className="w-full border border-slate-200 rounded-xl p-3 text-sm outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                >
+                  <option value="nuevo">Nuevo</option>
+                  <option value="casi nuevo">Casi nuevo</option>
+                  <option value="usado">Usado</option>
+                  <option value="intercambio">Intercambio</option>
+                </select>
               </div>
             </div>
+
+            {!isIntercambio && (
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">Precio (S/.) *</label>
+                <input
+                  name="price"
+                  type="number"
+                  min="1"
+                  value={form.price}
+                  onChange={handleChange}
+                  placeholder="0"
+                  className="w-full border border-slate-200 rounded-xl p-3 text-sm outline-none focus:ring-2 focus:ring-blue-500 transition"
+                />
+              </div>
+            )}
 
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">Descripción *</label>
@@ -150,7 +150,11 @@ export default function CreateServicePage() {
                 value={form.description}
                 onChange={handleChange}
                 rows={4}
-                placeholder="Describe tu servicio: experiencia, qué incluye, a quién va dirigido..."
+                placeholder={
+                  isIntercambio
+                    ? "Describe el producto y qué te gustaría recibir a cambio..."
+                    : "Describe el estado, edición, qué incluye..."
+                }
                 className="w-full border border-slate-200 rounded-xl p-3 text-sm outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"
               />
             </div>
@@ -166,10 +170,9 @@ export default function CreateServicePage() {
               </button>
               <button
                 onClick={handleSubmit}
-                disabled={loading}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-3 rounded-xl font-medium transition-colors"
+                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-medium transition-colors"
               >
-                {loading ? "Publicando..." : "Publicar Servicio"}
+                Publicar
               </button>
             </div>
           </div>
