@@ -76,7 +76,7 @@ CampusHub integra múltiples servicios universitarios en una sola plataforma:
 - Comunicación entre usuarios.
 - Sistema de calificaciones.
 
-Ejemplos:
+### Ejemplos
 
 - Tutorías.
 - Programación.
@@ -91,7 +91,7 @@ Ejemplos:
 - Gestión de disponibilidad.
 - Control de devolución.
 
-Recursos admitidos:
+### Recursos admitidos
 
 - Libros.
 - Calculadoras.
@@ -137,7 +137,7 @@ Recursos admitidos:
      └────┬────┴────┬────┘
           ▼         ▼
       Préstamos  Analítica
-```
+````
 
 ---
 
@@ -168,35 +168,174 @@ I --> J[Recomendaciones Personalizadas]
 
 ---
 
+# 🛠️ Stack Tecnológico
+
+| Tecnología   | Uso                           |
+| ------------ | ----------------------------- |
+| Next.js      | Framework Frontend            |
+| React        | Desarrollo de interfaces      |
+| TypeScript   | Tipado estático               |
+| Tailwind CSS | Estilos y diseño responsivo   |
+| Shadcn/UI    | Componentes UI                |
+| Supabase     | Base de datos y autenticación |
+| Prisma       | ORM                           |
+| PostgreSQL   | Persistencia de datos         |
+| Vercel       | Despliegue                    |
+
+---
+
+# 📂 Estructura del Proyecto
+
+```text
+campushub/
+│
+├── public/
+├── src/
+│   ├── app/
+│   ├── components/
+│   ├── features/
+│   ├── hooks/
+│   ├── services/
+│   ├── lib/
+│   ├── styles/
+│   └── types/
+│
+├── prisma/
+├── docs/
+├── tests/
+└── README.md
+```
+
+---
+
+# ⚙️ Instalación
+
+## Requisitos
+
+* Node.js 20+
+* npm, pnpm, yarn o bun
+
+## Clonar repositorio
+
+```bash
+git clone <repository-url>
+cd campushub
+```
+
+## Instalar dependencias
+
+```bash
+npm install
+```
+
+o
+
+```bash
+pnpm install
+```
+
+---
+
+# 🚀 Ejecución Local
+
+Iniciar servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+o
+
+```bash
+pnpm dev
+```
+
+Abrir:
+
+```text
+http://localhost:3000
+```
+
+La aplicación se actualizará automáticamente al realizar cambios en el código.
+
+---
+
+# 🔐 Variables de Entorno
+
+Crear un archivo:
+
+```bash
+.env.local
+```
+
+Ejemplo:
+
+```env
+DATABASE_URL=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+JWT_SECRET=
+```
+
+---
+
+# 📦 Scripts Disponibles
+
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
+npm run test
+```
+
+---
+
+# 🌐 Despliegue
+
+La aplicación puede desplegarse fácilmente utilizando Vercel.
+
+```bash
+npm run build
+```
+
+Para producción:
+
+```bash
+vercel deploy
+```
+
+---
+
 # 📋 Módulos del Sistema
 
-| Módulo | Funcionalidades |
-|----------|----------------|
-| Usuarios | Registro, autenticación, perfil, historial |
-| Eventos | Creación, inscripción, asistencia QR |
-| Servicios | Publicación, contratación, valoración |
-| Préstamos | Solicitudes y control de recursos |
-| Marketplace | Compra, venta e intercambio |
-| Analítica | Estadísticas e indicadores |
+| Módulo      | Funcionalidades                            |
+| ----------- | ------------------------------------------ |
+| Usuarios    | Registro, autenticación, perfil, historial |
+| Eventos     | Creación, inscripción, asistencia QR       |
+| Servicios   | Publicación, contratación, valoración      |
+| Préstamos   | Solicitudes y control de recursos          |
+| Marketplace | Compra, venta e intercambio                |
+| Analítica   | Estadísticas e indicadores                 |
 
 ---
 
 # 🎯 Público Objetivo
 
-### Usuarios Directos
+## Usuarios Directos
 
-- Estudiantes universitarios.
-- Capítulos estudiantiles.
-- Organizaciones académicas.
-- Docentes.
-- Organizadores de eventos.
+* Estudiantes universitarios.
+* Capítulos estudiantiles.
+* Organizaciones académicas.
+* Docentes.
+* Organizadores de eventos.
 
-### Usuarios Indirectos
+## Usuarios Indirectos
 
-- Facultades.
-- Escuelas profesionales.
-- Universidades.
-- Instituciones educativas.
+* Facultades.
+* Escuelas profesionales.
+* Universidades.
+* Instituciones educativas.
 
 ---
 
@@ -204,8 +343,8 @@ I --> J[Recomendaciones Personalizadas]
 
 ## UniHub Developers
 
-| Integrante |
-|------------|
+| Integrante                  |
+| --------------------------- |
 | Maria Solange Ezcurra Paima |
 | Melsy Melany Huamaní Vargas |
 
@@ -213,15 +352,24 @@ I --> J[Recomendaciones Personalizadas]
 
 # 🎓 Información Académica
 
-| Campo | Información |
-|---------|------------|
-| Universidad | Universidad Nacional de San Agustín de Arequipa |
-| Escuela Profesional | Ingeniería de Sistemas |
-| Año | 2026 |
-| País | Perú |
+| Campo               | Información                                     |
+| ------------------- | ----------------------------------------------- |
+| Universidad         | Universidad Nacional de San Agustín de Arequipa |
+| Escuela Profesional | Ingeniería de Sistemas                          |
+| Año                 | 2026                                            |
+| País                | Perú                                            |
 
 ---
 
-<div align="center">
+# 📚 Recursos
 
-</div>
+* Next.js Documentation: [https://nextjs.org/docs](https://nextjs.org/docs)
+* Learn Next.js: [https://nextjs.org/learn](https://nextjs.org/learn)
+* TypeScript: [https://www.typescriptlang.org](https://www.typescriptlang.org)
+* React: [https://react.dev](https://react.dev)
+
+---
+
+# 📄 Licencia
+
+Proyecto desarrollado con fines académicos para la Universidad Nacional de San Agustín de Arequipa.
