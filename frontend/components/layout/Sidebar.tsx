@@ -14,22 +14,21 @@ import {
   Handshake,
   BookOpen,
   LogOut,
+  ScanLine,
 } from "lucide-react";
 
-// ── Tipos ─────────────────────────────────────────────
 interface NavItem {
   href: string;
   label: string;
   icon: React.ElementType;
 }
 
-// ── Links de navegación ───────────────────────────────
 const mainNav: NavItem[] = [
-  { href: "/events",    label: "Events",      icon: Calendar   },
-  { href: "/analytics", label: "Analytics",   icon: BarChart3  },
-  { href: "/services",  label: "Marketplace", icon: Store      },
-  { href: "/loans",     label: "Services",    icon: Handshake  },
-  { href: "/loans",     label: "Loans",       icon: BookOpen   },
+  { href: "/events",     label: "Eventos",    icon: Calendar  },
+  { href: "/analytics",  label: "Analytics",  icon: BarChart3 },
+  { href: "/services",   label: "Comunidad",  icon: Store     },
+  { href: "/loans",      label: "Préstamos",  icon: BookOpen  },
+  { href: "/attendance", label: "Asistencia", icon: ScanLine  },
 ];
 
 const accountNav: NavItem[] = [
@@ -67,8 +66,8 @@ export default function Sidebar() {
   const { user, isLoggedIn, logout } = useAuth();
   const router = useRouter();
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     router.push("/login");
   };
 
@@ -84,19 +83,16 @@ export default function Sidebar() {
   return (
     <aside className="w-72 bg-gradient-to-b from-[#02112B] to-[#041A45] text-white min-h-screen flex flex-col shadow-2xl">
 
-      {/* Logo */}
       <div className="p-6 border-b border-slate-800">
         <h1 className="text-2xl font-bold">CampusHub</h1>
         <p className="text-sm text-slate-400 mt-1">Smart Campus Platform</p>
       </div>
 
-      {/* Navegación principal */}
       <nav className="flex-1 p-4 space-y-1">
         {mainNav.map((item) => (
           <NavLink key={item.label} {...item} />
         ))}
 
-        {/* Sección Account — solo si está logueado */}
         {isLoggedIn && (
           <>
             <div className="pt-6 pb-2 text-xs text-slate-500 uppercase tracking-widest">
@@ -108,7 +104,6 @@ export default function Sidebar() {
           </>
         )}
 
-        {/* Sección Auth — solo si NO está logueado */}
         {!isLoggedIn && (
           <>
             <div className="pt-6 pb-2 text-xs text-slate-500 uppercase tracking-widest">
@@ -121,7 +116,6 @@ export default function Sidebar() {
         )}
       </nav>
 
-      {/* Footer: perfil + logout */}
       <div className="p-4 border-t border-slate-800">
         {isLoggedIn ? (
           <div className="bg-slate-900 rounded-xl p-4">

@@ -1,0 +1,405 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+enum Role {
+  STUDENT
+  ORGANIZER
+  ADMIN
+}
+
+enum EventCategory {
+  TECNOLOGIA
+  EMPRENDIMIENTO
+  ARTE_CULTURA
+  DEPORTES
+  CIENCIA
+  VOLUNTARIADO
+  MUSICA
+  DISENO
+  IDIOMAS
+  INVESTIGACION
+}
+
+enum ServiceCategory {
+  TUTORIA
+  PROGRAMACION
+  DISENO
+  MATEMATICAS
+  FISICA
+  QUIMICA
+  IDIOMAS
+  ESTADISTICA
+  REDACCION
+  CONTABILIDAD
+}
+
+enum PriceType {
+  HORA
+  SESION
+  PROYECTO
+  FIJO
+}
+
+enum ProductCategory {
+  LIBROS
+  APUNTES
+  CALCULADORAS
+  LAPTOPS
+  MATERIAL_DIBUJO
+  INSTRUMENTOS
+  ROPA_UNIVERSITARIA
+  OTROS
+}
+
+enum ProductCondition {
+  NUEVO
+  CASI_NUEVO
+  USADO
+  INTERCAMBIO
+}
+
+enum LoanStatus {
+  PENDING
+  ACTIVE
+  RETURNED
+  OVERDUE
+  CANCELLED
+}
+
+enum ReactionType {
+  LIKE
+  HEART
+  FIRE
+  CLAP
+}
+
+enum RequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  COMPLETED
+}
+
+enum NotificationType {
+  EVENT_REGISTRATION
+  EVENT_REMINDER
+  EVENT_CANCELLED
+  NEW_MESSAGE
+  SERVICE_REQUEST
+  LOAN_DUE
+  COMMENT_REPLY
+}
+
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String?
+  name         String
+  career       String
+  bio          String?
+  avatarUrl    String?
+  role         Role     @default(STUDENT)
+  refreshToken String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  interests        UserInterest[]
+  oauthAccounts    OAuthAccount[]
+  organizedEvents  Event[]             @relation("EventOrganizer")
+  registrations    EventRegistration[]
+  attendances      AttendanceRecord[]
+  comments         Comment[]
+  reactions        Reaction[]
+  services         Service[]
+  serviceRequests  ServiceRequest[]    @relation("Requester")
+  products         Product[]
+  loansAsBorrower  Loan[]              @relation("LoanBorrower")
+  loansAsLender    Loan[]              @relation("LoanLender")
+  ratingsGiven     Rating[]            @relation("RatingAuthor")
+  ratingsReceived  Rating[]            @relation("RatingTarget")
+  messages         Message[]           @relation("MessageSender")
+  chatParticipants ChatParticipant[]
+  notifications    Notification[]
+
+  @@map("users")
+}
+
+model UserInterest {
+  id       String @id @default(cuid())
+  userId   String
+  interest String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, interest])
+  @@map("user_interests")
+}
+
+model OAuthAccount {
+  id             String    @id @default(cuid())
+  userId         String
+  provider       String
+  providerUserId String
+  accessToken    String?
+  refreshToken   String?
+  expiresAt      DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerUserId])
+  @@map("oauth_accounts")
+}
+
+
+model Event {
+  id          String        @id @default(cuid())
+  title       String
+  description String
+  category    EventCategory
+  date        DateTime
+  location    String
+  capacity    Int
+  imageUrl    String?
+  isPublished Boolean       @default(true)
+  isCancelled Boolean       @default(false)
+  organizerId String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  organizer     User                @relation("EventOrganizer", fields: [organizerId], references: [id])
+  registrations EventRegistration[]
+  attendances   AttendanceRecord[]
+  comments      Comment[]
+  reactions     Reaction[]
+
+  @@map("events")
+}
+
+model EventRegistration {
+  id           String   @id @default(cuid())
+  eventId      String
+  userId       String
+  qrToken      String   @unique
+  registeredAt DateTime @default(now())
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, userId])
+  @@map("event_registrations")
+}
+
+model AttendanceRecord {
+  id          String   @id @default(cuid())
+  eventId     String
+  userId      String
+  scannedAt   DateTime @default(now())
+  scannedById String?
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, userId])
+  @@map("attendance_records")
+}
+
+
+model Comment {
+  id        String   @id @default(cuid())
+  eventId   String
+  userId    String
+  body      String
+  parentId  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  event   Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent  Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies Comment[] @relation("CommentReplies")
+
+  @@map("comments")
+}
+
+model Reaction {
+  id        String       @id @default(cuid())
+  eventId   String
+  userId    String
+  type      ReactionType
+  createdAt DateTime     @default(now())
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, userId, type])
+  @@map("reactions")
+}
+
+
+model Service {
+  id          String          @id @default(cuid())
+  title       String
+  description String
+  category    ServiceCategory
+  price       Float
+  priceType   PriceType
+  isActive    Boolean         @default(true)
+  ownerId     String
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  owner    User             @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  requests ServiceRequest[]
+  ratings  Rating[]
+
+  @@map("services")
+}
+
+model ServiceRequest {
+  id          String        @id @default(cuid())
+  serviceId   String
+  requesterId String
+  message     String
+  status      RequestStatus @default(PENDING)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  requester User    @relation("Requester", fields: [requesterId], references: [id], onDelete: Cascade)
+
+  @@map("service_requests")
+}
+
+
+model Product {
+  id          String           @id @default(cuid())
+  title       String
+  description String
+  category    ProductCategory
+  price       Float
+  condition   ProductCondition
+  imageUrl    String?
+  isAvailable Boolean          @default(true)
+  ownerId     String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  owner   User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ratings Rating[]
+
+  @@map("products")
+}
+
+
+model Resource {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  code        String   @unique
+  imageUrl    String?
+  isAvailable Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  loans Loan[]
+
+  @@map("resources")
+}
+
+model Loan {
+  id         String     @id @default(cuid())
+  resourceId String
+  borrowerId String
+  lenderId   String?
+  status     LoanStatus @default(PENDING)
+  dueDate    DateTime
+  returnedAt DateTime?
+  notes      String?
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  resource Resource @relation(fields: [resourceId], references: [id])
+  borrower User     @relation("LoanBorrower", fields: [borrowerId], references: [id])
+  lender   User?    @relation("LoanLender", fields: [lenderId], references: [id])
+
+  @@map("loans")
+}
+
+
+model Rating {
+  id        String   @id @default(cuid())
+  authorId  String
+  targetId  String
+  serviceId String?
+  productId String?
+  score     Int
+  comment   String?
+  createdAt DateTime @default(now())
+
+  author  User     @relation("RatingAuthor", fields: [authorId], references: [id])
+  target  User     @relation("RatingTarget", fields: [targetId], references: [id])
+  service Service? @relation(fields: [serviceId], references: [id])
+  product Product? @relation(fields: [productId], references: [id])
+
+  @@map("ratings")
+}
+
+
+model Chat {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  participants ChatParticipant[]
+  messages     Message[]
+
+  @@map("chats")
+}
+
+model ChatParticipant {
+  id     String @id @default(cuid())
+  chatId String
+  userId String
+
+  chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([chatId, userId])
+  @@map("chat_participants")
+}
+
+model Message {
+  id        String    @id @default(cuid())
+  chatId    String
+  senderId  String
+  body      String
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  chat   Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  sender User @relation("MessageSender", fields: [senderId], references: [id])
+
+  @@map("messages")
+}
+
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  type      NotificationType
+  title     String
+  body      String
+  data      Json?
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}

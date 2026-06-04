@@ -13,13 +13,11 @@ export default function ProtectedRoute({ children }: Props) {
   const router = useRouter();
 
   useEffect(() => {
-    // Esperamos a que termine de cargar antes de redirigir
     if (!isLoading && !isLoggedIn) {
       router.replace("/login");
     }
   }, [isLoading, isLoggedIn, router]);
 
-  // Mientras carga, mostramos un spinner (evita el flash de contenido)
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#F5F7FB]">

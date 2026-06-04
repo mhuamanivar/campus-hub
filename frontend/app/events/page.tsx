@@ -1,88 +1,63 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import EventCard from "@/components/events/EventCard";
-import { events as defaultEvents, CATEGORIES, Event } from "@/data/events";
 import { useAuth } from "@/components/auth/AuthContext";
+import { useEvents } from "@/hooks/useEvents";
+import { EVENT_CATEGORIES, EVENT_CATEGORY_LABEL, EVENT_CATEGORY_VALUE } from "@/lib/categories";
 import { Search, SlidersHorizontal } from "lucide-react";
 
-type SortOption = "fecha" | "nombre" | "cupos";
+type SortOption = "date" | "title" | "capacity";
+
+// Debounce helper hook
+function useDebounce<T>(value: T, delay: number): T {
+  const [debounced, setDebounced] = useState(value);
+  useEffect(() => {
+    const t = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(t);
+  }, [value, delay]);
+  return debounced;
+}
 
 export default function EventsPage() {
   const { user } = useAuth();
 
-  const [allEvents, setAllEvents] = useState<Event[]>(defaultEvents);
-  const [enrolledIds, setEnrolledIds] = useState<number[]>([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch]               = useState("");
   const [activeCategory, setActiveCategory] = useState<string>("Todos");
-  const [sortBy, setSortBy] = useState<SortOption>("fecha");
+  const [sortBy, setSortBy]               = useState<SortOption>("date");
   const [showOnlyEnrolled, setShowOnlyEnrolled] = useState(false);
 
-  // Cargamos eventos custom + inscripciones del usuario
-  useEffect(() => {
-    const customEvents: Event[] = JSON.parse(
-      localStorage.getItem("customEvents") || "[]"
-    );
-    setAllEvents([...defaultEvents, ...customEvents]);
+  const debouncedSearch = useDebounce(search, 300);
 
-    if (user) {
-      const registrations: { eventId: number; userEmail: string }[] = JSON.parse(
-        localStorage.getItem("registrations") || "[]"
-      );
-      const ids = registrations
-        .filter((r) => r.userEmail === user.email)
-        .map((r) => r.eventId);
-      setEnrolledIds(ids);
-    }
-  }, [user]);
+  const categoryParam = activeCategory !== "Todos"
+    ? EVENT_CATEGORY_VALUE[activeCategory]
+    : undefined;
 
-  // Filtrado + ordenamiento con useMemo para eficiencia
-  const filteredEvents = useMemo(() => {
-    let result = [...allEvents];
+  const { data: events = [], isLoading } = useEvents({
+    search: debouncedSearch || undefined,
+    category: categoryParam,
+    sortBy,
+  });
 
-    if (showOnlyEnrolled) {
-      result = result.filter((e) => enrolledIds.includes(e.id));
-    }
+  const filteredEvents = useMemo(
+    () => showOnlyEnrolled ? events.filter((e) => e.isRegistered) : events,
+    [events, showOnlyEnrolled],
+  );
 
-    if (activeCategory !== "Todos") {
-      result = result.filter((e) => e.category === activeCategory);
-    }
-
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      result = result.filter(
-        (e) =>
-          e.title.toLowerCase().includes(q) ||
-          e.description.toLowerCase().includes(q) ||
-          e.location.toLowerCase().includes(q)
-      );
-    }
-
-    result.sort((a, b) => {
-      if (sortBy === "fecha")  return new Date(a.date).getTime() - new Date(b.date).getTime();
-      if (sortBy === "nombre") return a.title.localeCompare(b.title);
-      if (sortBy === "cupos")  return (b.capacity - b.attendees) - (a.capacity - a.attendees);
-      return 0;
-    });
-
-    return result;
-  }, [allEvents, activeCategory, search, sortBy, showOnlyEnrolled, enrolledIds]);
-
-  const categories = ["Todos", ...CATEGORIES];
+  const displayCategories = ["Todos", ...EVENT_CATEGORIES.map((k) => EVENT_CATEGORY_LABEL[k])];
 
   return (
     <DashboardLayout>
-
-      {/* Encabezado */}
       <div className="mb-6">
         <h1 className="text-4xl font-bold text-slate-900">Eventos</h1>
         <p className="text-slate-500 mt-1">
-          {filteredEvents.length} evento{filteredEvents.length !== 1 ? "s" : ""} disponibles
+          {isLoading
+            ? "Cargando eventos..."
+            : `${filteredEvents.length} evento${filteredEvents.length !== 1 ? "s" : ""} disponibles`}
         </p>
       </div>
 
-      {/* Barra de búsqueda + ordenamiento */}
       <div className="flex flex-col sm:flex-row gap-3 mb-5">
         <div className="relative flex-1">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -101,16 +76,15 @@ export default function EventsPage() {
             onChange={(e) => setSortBy(e.target.value as SortOption)}
             className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500 bg-white"
           >
-            <option value="fecha">Ordenar: Fecha</option>
-            <option value="nombre">Ordenar: Nombre</option>
-            <option value="cupos">Ordenar: Cupos</option>
+            <option value="date">Ordenar: Fecha</option>
+            <option value="title">Ordenar: Nombre</option>
+            <option value="capacity">Ordenar: Cupos</option>
           </select>
         </div>
       </div>
 
-      {/* Filtros por categoría */}
       <div className="flex gap-2 flex-wrap mb-6">
-        {categories.map((cat) => (
+        {displayCategories.map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
@@ -124,7 +98,6 @@ export default function EventsPage() {
           </button>
         ))}
 
-        {/* Toggle mis eventos */}
         {user && (
           <button
             onClick={() => setShowOnlyEnrolled((v) => !v)}
@@ -139,8 +112,13 @@ export default function EventsPage() {
         )}
       </div>
 
-      {/* Grid de eventos */}
-      {filteredEvents.length === 0 ? (
+      {isLoading ? (
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="h-80 bg-slate-100 rounded-3xl animate-pulse" />
+          ))}
+        </div>
+      ) : filteredEvents.length === 0 ? (
         <div className="text-center py-20 text-slate-400">
           <p className="text-xl font-medium">No se encontraron eventos</p>
           <p className="text-sm mt-2">Intenta con otra categoría o término de búsqueda</p>
@@ -148,15 +126,10 @@ export default function EventsPage() {
       ) : (
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredEvents.map((event) => (
-            <EventCard
-              key={event.id}
-              event={event}
-              isEnrolled={enrolledIds.includes(event.id)}
-            />
+            <EventCard key={event.id} event={event} />
           ))}
         </div>
       )}
-
     </DashboardLayout>
   );
 }

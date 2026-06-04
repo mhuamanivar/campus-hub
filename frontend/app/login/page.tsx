@@ -86,7 +86,6 @@ export default function RegisterPage() {
 
     setLoading(true);
     try {
-      // Llama al register del AuthContext — guarda con "campushub_user"
       await register({
         name: form.name,
         email: form.email,
@@ -114,7 +113,6 @@ export default function RegisterPage() {
 
         <div className="mt-8 space-y-4">
 
-          {/* Nombre */}
           <input
             name="name"
             value={form.name}
@@ -123,7 +121,6 @@ export default function RegisterPage() {
             className="w-full border rounded-xl p-3 outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          {/* Email */}
           <input
             name="email"
             type="email"
@@ -133,7 +130,6 @@ export default function RegisterPage() {
             className="w-full border rounded-xl p-3 outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          {/* Carrera — select en vez de input libre */}
           <select
             name="career"
             value={form.career}
@@ -146,7 +142,6 @@ export default function RegisterPage() {
             ))}
           </select>
 
-          {/* Contraseña */}
           <input
             name="password"
             type="password"
@@ -156,7 +151,6 @@ export default function RegisterPage() {
             className="w-full border rounded-xl p-3 outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          {/* Confirmar contraseña */}
           <input
             name="confirmPassword"
             type="password"

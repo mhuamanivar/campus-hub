@@ -1,375 +1,240 @@
-# 🎓 CampusHub
+# CampusHub
 
 <div align="center">
 
-### Plataforma inteligente que centraliza, gestiona y analiza eventos universitarios en tiempo real
+### Plataforma universitaria que centraliza eventos, servicios, préstamos y marketplace estudiantil
 
-[![Status](https://img.shields.io/badge/Status-En%20Desarrollo-orange)]()
+[![Status](https://img.shields.io/badge/Estado-Completado-brightgreen)]()
 [![Academic Project](https://img.shields.io/badge/Proyecto-Académico-blue)]()
 [![University](https://img.shields.io/badge/UNSA-Arequipa-red)]()
-[![License](https://img.shields.io/badge/License-Educational-green)]()
+[![License](https://img.shields.io/badge/Licencia-Educativa-green)]()
 
 </div>
 
 ---
 
-## 📖 Descripción
+## Descripción
 
-**CampusHub** es una plataforma digital diseñada para transformar la experiencia universitaria mediante la centralización de eventos académicos, servicios colaborativos, préstamos de recursos y un marketplace estudiantil dentro de un único ecosistema digital.
-
-La solución busca eliminar la dispersión de información en redes sociales, grupos de mensajería y correos electrónicos, permitiendo a los estudiantes descubrir oportunidades relevantes, interactuar con su comunidad y acceder a recursos académicos de manera eficiente.
+**CampusHub** es una plataforma digital full-stack para la Universidad Nacional de San Agustín de Arequipa (UNSA) que centraliza eventos académicos, servicios colaborativos, préstamos de recursos y un marketplace estudiantil en un único ecosistema digital.
 
 ---
 
-## 🎯 Problema
+## Stack Tecnológico
 
-Actualmente, la información sobre actividades universitarias se encuentra distribuida en múltiples canales, generando:
-
-- Baja visibilidad de eventos.
-- Pérdida de oportunidades académicas.
-- Escasa participación estudiantil.
-- Dificultad para medir el impacto de actividades.
-- Falta de espacios colaborativos centralizados.
-- Ausencia de información para la toma de decisiones.
-
----
-
-## 💡 Solución
-
-CampusHub integra múltiples servicios universitarios en una sola plataforma:
-
-| Módulo | Descripción |
-|---------|------------|
-| 📅 Eventos | Gestión completa de eventos universitarios |
-| 👥 Comunidad | Interacción y participación estudiantil |
-| 🛠️ Servicios | Oferta y solicitud de servicios entre estudiantes |
-| 📚 Préstamos | Gestión de recursos académicos compartidos |
-| 🛒 Marketplace | Compra, venta e intercambio de productos |
-| 📊 Analítica | Métricas y visualización de datos en tiempo real |
+| Área | Tecnología |
+|------|-----------|
+| Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS 4, TanStack Query, React Hook Form, Zod |
+| Backend | NestJS, TypeScript, Prisma ORM |
+| Base de datos | PostgreSQL 16 (via Docker) |
+| Autenticación | JWT (access + refresh tokens), Google OAuth 2.0 |
+| Infraestructura | Docker Compose (BD), Node.js local (backend + frontend) |
 
 ---
 
-# 🚀 Características Principales
+## Módulos Implementados
 
-## 📅 Gestión de Eventos
-
-- Creación y administración de eventos.
-- Feed personalizado basado en intereses.
-- Inscripción de participantes.
-- Códigos QR para control de asistencia.
-- Check-in en tiempo real.
-- Comentarios y reacciones.
-- Clasificación por categorías.
-
-## 👤 Gestión de Usuarios
-
-- Registro e inicio de sesión.
-- Perfil académico personalizado.
-- Gestión de intereses.
-- Historial de participación.
-- Recomendaciones inteligentes.
-
-## 🛠️ Servicios Colaborativos
-
-- Publicación de servicios.
-- Solicitud de servicios.
-- Comunicación entre usuarios.
-- Sistema de calificaciones.
-
-### Ejemplos
-
-- Tutorías.
-- Programación.
-- Diseño gráfico.
-- Asesorías académicas.
-- Freelance estudiantil.
-
-## 📚 Sistema de Préstamos
-
-- Publicación de recursos.
-- Solicitud de préstamo.
-- Gestión de disponibilidad.
-- Control de devolución.
-
-### Recursos admitidos
-
-- Libros.
-- Calculadoras.
-- Laptops.
-- Equipos electrónicos.
-- Material académico.
-
-## 🛒 Marketplace Universitario
-
-- Publicación de productos.
-- Compra y venta.
-- Intercambio de recursos.
-- Sistema de reputación.
-- Filtros por categoría.
-
-## 📊 Analítica e Inteligencia de Datos
-
-- Asistencia por evento.
-- Participación estudiantil.
-- Eventos más populares.
-- Interacciones generadas.
-- Tendencias de interés.
-- Indicadores para la toma de decisiones.
+| Módulo | Funcionalidades |
+|--------|----------------|
+| **Autenticación** | Registro, login, logout, refresh token, Google OAuth, sesión persistente |
+| **Usuarios** | Perfil, carrera, intereses, edición de cuenta |
+| **Eventos** | CRUD completo, feed con búsqueda y filtros, inscripción, QR de asistencia |
+| **Asistencia QR** | Escáner por cámara en tiempo real, registro de asistentes |
+| **Comentarios** | Comentarios anidados con respuestas, eliminación propia |
+| **Reacciones** | 👍 ❤️ 🔥 👏 toggle por evento |
+| **Servicios** | Publicar/buscar tutorías, programación, diseño y más |
+| **Marketplace** | Publicar/buscar productos (venta e intercambio) |
+| **Préstamos** | Catálogo de recursos académicos, solicitar y devolver |
+| **Notificaciones** | In-app, conteo en tiempo real, marcar como leído |
+| **Analítica** | Métricas de eventos, inscripciones, usuarios, tasa de asistencia |
 
 ---
 
-# 🏗️ Arquitectura Funcional
+## Estructura del Proyecto
 
-```text
-┌──────────────────────────────┐
-│          Usuarios            │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│         CampusHub            │
-└──────────────┬───────────────┘
-               │
-     ┌─────────┼─────────┐
-     ▼         ▼         ▼
- Eventos   Servicios  Marketplace
-     │         │         │
-     └────┬────┴────┬────┘
-          ▼         ▼
-      Préstamos  Analítica
-````
-
----
-
-# 🔄 Flujo General del Usuario
-
-```mermaid
-flowchart TD
-
-A[Registro o Inicio de Sesión]
---> B[Configurar Perfil]
-
-B --> C[Seleccionar Intereses]
-
-C --> D[Feed Personalizado]
-
-D --> E[Explorar Eventos]
-
-E --> F[Inscribirse]
-
-F --> G[Asistencia mediante QR]
-
-G --> H[Interacción]
-
-H --> I[Generación de Métricas]
-
-I --> J[Recomendaciones Personalizadas]
 ```
-
----
-
-# 🛠️ Stack Tecnológico
-
-| Tecnología   | Uso                           |
-| ------------ | ----------------------------- |
-| Next.js      | Framework Frontend            |
-| React        | Desarrollo de interfaces      |
-| TypeScript   | Tipado estático               |
-| Tailwind CSS | Estilos y diseño responsivo   |
-| Shadcn/UI    | Componentes UI                |
-| Supabase     | Base de datos y autenticación |
-| Prisma       | ORM                           |
-| PostgreSQL   | Persistencia de datos         |
-| Vercel       | Despliegue                    |
-
----
-
-# 📂 Estructura del Proyecto
-
-```text
-campushub/
-│
-├── public/
-├── src/
-│   ├── app/
-│   ├── components/
-│   ├── features/
-│   ├── hooks/
-│   ├── services/
-│   ├── lib/
-│   ├── styles/
-│   └── types/
-│
-├── prisma/
-├── docs/
-├── tests/
+campus-hub/
+├── frontend/          # Next.js 16 → http://localhost:3000
+├── backend/           # NestJS    → http://localhost:3001
+├── docker-compose.yml # PostgreSQL 16 → localhost:5432
 └── README.md
 ```
 
 ---
 
-# ⚙️ Instalación
+## Requisitos Previos
 
-## Requisitos
+- [Node.js 20+](https://nodejs.org/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- npm 10+
 
-* Node.js 20+
-* npm, pnpm, yarn o bun
+---
 
-## Clonar repositorio
+## Instalación y Ejecución Local
+
+### 1. Clonar el repositorio
 
 ```bash
 git clone <repository-url>
-cd campushub
+cd campus-hub
 ```
 
-## Instalar dependencias
+### 2. Iniciar la base de datos
+
+```bash
+docker-compose up -d
+```
+
+PostgreSQL correrá en `localhost:5432`. Para verificar:
+
+```bash
+docker-compose ps
+```
+
+### 3. Configurar y correr el Backend
+
+```bash
+cd backend
+cp .env.example .env
+```
+
+Editar `.env` y completar los valores (ver [Variables de Entorno](#variables-de-entorno)), luego:
 
 ```bash
 npm install
+npx prisma migrate dev
+npm run prisma:seed
+npm run start:dev
 ```
 
-o
+El backend estará disponible en **http://localhost:3001**
+
+### 4. Configurar y correr el Frontend
+
+Abrir una nueva terminal:
 
 ```bash
-pnpm install
-```
-
----
-
-# 🚀 Ejecución Local
-
-Iniciar servidor de desarrollo:
-
-```bash
+cd frontend
+cp .env.local.example .env.local
+npm install
 npm run dev
 ```
 
-o
-
-```bash
-pnpm dev
-```
-
-Abrir:
-
-```text
-http://localhost:3000
-```
-
-La aplicación se actualizará automáticamente al realizar cambios en el código.
+La aplicación estará disponible en **http://localhost:3000**
 
 ---
 
-# 🔐 Variables de Entorno
+## Variables de Entorno
 
-Crear un archivo:
-
-```bash
-.env.local
-```
-
-Ejemplo:
+### Backend — `backend/.env`
 
 ```env
-DATABASE_URL=
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
+DATABASE_URL="postgresql://campushub:campushub_secret@localhost:5432/campushub"
+NODE_ENV=development
+PORT=3001
+FRONTEND_URL=http://localhost:3000
+
+# Generar con: node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 JWT_SECRET=
+JWT_EXPIRES_IN=15m
+JWT_REFRESH_SECRET=
+JWT_REFRESH_EXPIRES_IN=7d
+JWT_QR_SECRET=
+JWT_QR_EXPIRES_IN=30d
+
+# Obtener en: https://console.cloud.google.com (opcional)
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_CALLBACK_URL=http://localhost:3001/auth/google/callback
+```
+
+### Frontend — `frontend/.env.local`
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3001
+NEXT_PUBLIC_USE_API=true
 ```
 
 ---
 
-# 📦 Scripts Disponibles
+## Cuentas de Demo
+
+Todas las cuentas usan la contraseña `password123`:
+
+| Email | Rol |
+|-------|-----|
+| `estudiante@unsa.edu.pe` | Estudiante (cuenta demo) |
+| `sistemas@unsa.edu.pe` | Organizador |
+| `carlos@unsa.edu.pe` | Proveedor de servicios |
+| `pedro@unsa.edu.pe` | Vendedor en marketplace |
+
+---
+
+## Comandos Útiles
+
+### Base de datos
 
 ```bash
-npm run dev
-npm run build
-npm run start
-npm run lint
-npm run test
+# Iniciar
+docker-compose up -d
+
+# Detener
+docker-compose down
+
+# Ver logs
+docker-compose logs -f db
 ```
 
----
-
-# 🌐 Despliegue
-
-La aplicación puede desplegarse fácilmente utilizando Vercel.
+### Backend
 
 ```bash
-npm run build
+cd backend
+
+npm run start:dev          # Desarrollo con hot reload
+npm run build              # Compilar
+npm run start:prod         # Producción
+
+npx prisma migrate dev     # Aplicar migraciones
+npx prisma migrate reset   # Resetear BD
+npm run prisma:seed        # Poblar con datos de demo
+npx prisma generate        # Regenerar cliente tras cambios en schema
+npx prisma studio          # Explorador visual → http://localhost:5555
+
+npm run test               # Tests unitarios
+npm run test:e2e           # Tests de integración
 ```
 
-Para producción:
+### Frontend
 
 ```bash
-vercel deploy
+cd frontend
+
+npm run dev     # Desarrollo
+npm run build   # Build de producción
+npm run start   # Iniciar build
+npm run lint    # Linter
 ```
 
 ---
 
-# 📋 Módulos del Sistema
+## Flujo Principal
 
-| Módulo      | Funcionalidades                            |
-| ----------- | ------------------------------------------ |
-| Usuarios    | Registro, autenticación, perfil, historial |
-| Eventos     | Creación, inscripción, asistencia QR       |
-| Servicios   | Publicación, contratación, valoración      |
-| Préstamos   | Solicitudes y control de recursos          |
-| Marketplace | Compra, venta e intercambio                |
-| Analítica   | Estadísticas e indicadores                 |
+```
+Registro → Perfil → Feed de Eventos → Inscripción → QR de Asistencia → Analítica
+```
 
 ---
 
-# 🎯 Público Objetivo
+## Equipo de Desarrollo
 
-## Usuarios Directos
-
-* Estudiantes universitarios.
-* Capítulos estudiantiles.
-* Organizaciones académicas.
-* Docentes.
-* Organizadores de eventos.
-
-## Usuarios Indirectos
-
-* Facultades.
-* Escuelas profesionales.
-* Universidades.
-* Instituciones educativas.
-
----
-
-# 👨‍💻 Equipo de Desarrollo
-
-## UniHub Developers
-
-| Integrante                  |
-| --------------------------- |
+| Integrante |
+|------------|
 | Maria Solange Ezcurra Paima |
 | Melsy Melany Huamaní Vargas |
 
----
-
-# 🎓 Información Académica
-
-| Campo               | Información                                     |
-| ------------------- | ----------------------------------------------- |
-| Universidad         | Universidad Nacional de San Agustín de Arequipa |
-| Escuela Profesional | Ingeniería de Sistemas                          |
-| Año                 | 2026                                            |
-| País                | Perú                                            |
+**Universidad Nacional de San Agustín de Arequipa — Ingeniería de Sistemas — 2026**
 
 ---
 
-# 📚 Recursos
-
-* Next.js Documentation: [https://nextjs.org/docs](https://nextjs.org/docs)
-* Learn Next.js: [https://nextjs.org/learn](https://nextjs.org/learn)
-* TypeScript: [https://www.typescriptlang.org](https://www.typescriptlang.org)
-* React: [https://react.dev](https://react.dev)
-
----
-
-# 📄 Licencia
+## Licencia
 
 Proyecto desarrollado con fines académicos para la Universidad Nacional de San Agustín de Arequipa.
