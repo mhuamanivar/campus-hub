@@ -2,9 +2,9 @@ export interface ApiService {
   id: string;
   title: string;
   description: string;
-  category: string;   // enum e.g. "TUTORIA"
+  category: string;
   price: number;
-  priceType: string;  // enum e.g. "HORA"
+  priceType: string;
   isActive: boolean;
   ownerId: string;
   ownerName: string;
@@ -17,9 +17,9 @@ export interface ApiProduct {
   id: string;
   title: string;
   description: string;
-  category: string;   // enum e.g. "LIBROS"
+  category: string;
   price: number;
-  condition: string;  // enum e.g. "USADO"
+  condition: string;
   imageUrl?: string | null;
   isAvailable: boolean;
   ownerId: string;

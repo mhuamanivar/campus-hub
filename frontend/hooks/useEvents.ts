@@ -81,8 +81,6 @@ export function useRegisterEvent(eventId: string) {
   });
 }
 
-// ── Unregister ────────────────────────────────────────────────────────────────
-
 export function useUnregisterEvent(eventId: string) {
   const queryClient = useQueryClient();
   return useMutation({

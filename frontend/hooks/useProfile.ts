@@ -23,7 +23,6 @@ export function useMyRegisteredEvents() {
   return useQuery({
     queryKey: ["events", "registered"],
     queryFn: async () => {
-      // Get all events and filter by isRegistered
       const res = await api.get<ApiResponse<ApiEvent[]>>("/events");
       return res.data.data.filter((e) => e.isRegistered);
     },

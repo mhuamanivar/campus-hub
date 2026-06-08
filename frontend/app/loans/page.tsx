@@ -57,7 +57,6 @@ export default function LoansPage() {
         </div>
       )}
 
-      {/* Available resources */}
       <div className="mb-10">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Recursos Disponibles</h2>
         {loadingRes ? (
@@ -122,7 +121,6 @@ export default function LoansPage() {
         )}
       </div>
 
-      {/* My loans */}
       {user && (
         <div>
           <h2 className="text-2xl font-bold text-slate-900 mb-4">Mis Préstamos</h2>

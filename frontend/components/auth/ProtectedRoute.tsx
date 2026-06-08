@@ -29,7 +29,6 @@ export default function ProtectedRoute({ children }: Props) {
     );
   }
 
-  // Si no está logueado, no renderizamos nada (el useEffect ya redirige)
   if (!isLoggedIn) return null;
 
   return <>{children}</>;

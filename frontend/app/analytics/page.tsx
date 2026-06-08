@@ -62,7 +62,6 @@ export default function AnalyticsPage() {
         <p className="text-slate-500 mt-2">Resumen general de CampusHub en tiempo real</p>
       </div>
 
-      {/* Stat Cards */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
         {loadingOverview ? (
           Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-40" />)
@@ -143,7 +142,6 @@ export default function AnalyticsPage() {
           )}
         </div>
 
-        {/* Estado de módulos */}
         <div className="bg-white rounded-3xl p-6 shadow-sm">
           <h2 className="text-xl font-bold text-slate-900 mb-6">Estado de la plataforma</h2>
           <div className="space-y-5">

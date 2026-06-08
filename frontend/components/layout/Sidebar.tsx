@@ -41,7 +41,6 @@ const guestNav: NavItem[] = [
   { href: "/register", label: "Register", icon: UserPlus },
 ];
 
-// ── Sub-componente: NavLink ────────────────────────────
 function NavLink({ href, label, icon: Icon }: NavItem) {
   const pathname = usePathname();
   const isActive = pathname === href;
@@ -61,7 +60,6 @@ function NavLink({ href, label, icon: Icon }: NavItem) {
   );
 }
 
-// ── Componente principal ──────────────────────────────
 export default function Sidebar() {
   const { user, isLoggedIn, logout } = useAuth();
   const router = useRouter();

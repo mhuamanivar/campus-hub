@@ -68,7 +68,6 @@ export class LoansService {
 
     const updated = await this.prisma.loan.update({ where: { id }, data: { status: dto.status } });
 
-    // Free up resource when returned
     if (dto.status === 'RETURNED' || dto.status === 'CANCELLED') {
       await this.prisma.loan.update({ where: { id }, data: { returnedAt: new Date() } });
       await this.prisma.resource.update({ where: { id: loan.resourceId }, data: { isAvailable: true } });

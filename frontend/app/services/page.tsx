@@ -75,7 +75,6 @@ export default function ServicesPage() {
         </Link>
       </div>
 
-      {/* Tabs */}
       <div className="flex gap-1 bg-slate-100 p-1 rounded-xl w-fit mb-6">
         {(["services", "products"] as Tab[]).map((tab) => (
           <button
@@ -114,7 +113,6 @@ export default function ServicesPage() {
         ))}
       </div>
 
-      {/* Grid */}
       {isLoading ? (
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {Array.from({ length: 6 }).map((_, i) => (

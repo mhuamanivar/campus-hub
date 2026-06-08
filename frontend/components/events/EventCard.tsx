@@ -65,7 +65,6 @@ export default function EventCard({ event }: Props) {
         )}
       </div>
 
-      {/* Contenido */}
       <div className="p-5 flex flex-col flex-1">
         <span className={`text-xs px-3 py-1 rounded-full font-medium w-fit ${badge}`}>
           {label}

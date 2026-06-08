@@ -69,7 +69,6 @@ export class ServicesService {
       include: { service: { select: { title: true } } },
     });
 
-    // Generate notification for service owner
     await this.prisma.notification.create({
       data: {
         userId: service.ownerId,

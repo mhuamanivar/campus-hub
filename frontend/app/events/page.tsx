@@ -10,7 +10,6 @@ import { Search, SlidersHorizontal } from "lucide-react";
 
 type SortOption = "date" | "title" | "capacity";
 
-// Debounce helper hook
 function useDebounce<T>(value: T, delay: number): T {
   const [debounced, setDebounced] = useState(value);
   useEffect(() => {

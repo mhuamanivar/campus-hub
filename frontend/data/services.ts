@@ -10,7 +10,7 @@ export interface Service {
   createdAt: string;
   rating: number;
   reviewCount: number;
-  type: "service"; // discriminador
+  type: "service";
 }
 
 export interface Product {
@@ -25,7 +25,7 @@ export interface Product {
   createdAt: string;
   rating: number;
   reviewCount: number;
-  type: "product"; // discriminador
+  type: "product";
 }
 
 export const SERVICE_CATEGORIES = [
@@ -52,7 +52,6 @@ export const PRODUCT_CATEGORIES = [
   "Otros",
 ] as const;
 
-// Datos de ejemplo
 export const defaultServices: Service[] = [
   {
     id: 1,

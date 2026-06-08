@@ -48,7 +48,6 @@ export class ReactionsService {
       return { toggled: 'removed', type };
     }
 
-    // Remove any other reaction from this user on this event first (one reaction per user)
     await this.prisma.reaction.deleteMany({ where: { eventId, userId } });
 
     await this.prisma.reaction.create({ data: { eventId, userId, type } });

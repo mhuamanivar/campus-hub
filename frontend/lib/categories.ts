@@ -1,5 +1,3 @@
-// Mapping between Prisma enum values and Spanish display labels
-
 export const EVENT_CATEGORY_LABEL: Record<string, string> = {
   TECNOLOGIA:    "Tecnología",
   EMPRENDIMIENTO:"Emprendimiento",

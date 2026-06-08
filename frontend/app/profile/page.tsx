@@ -89,7 +89,6 @@ export default function ProfilePage() {
           )}
         </div>
 
-        {/* My Services */}
         <div className="mt-10">
           <h2 className="text-2xl font-bold mb-4">Mis Servicios</h2>
           {loadingServices ? (

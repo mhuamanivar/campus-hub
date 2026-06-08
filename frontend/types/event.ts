@@ -1,9 +1,8 @@
-// API response shape for an event
 export interface ApiEvent {
   id: string;
   title: string;
   description: string;
-  category: string;        // enum value e.g. "TECNOLOGIA"
+  category: string;
   date: string;
   location: string;
   capacity: number;
@@ -13,6 +12,6 @@ export interface ApiEvent {
   organizerEmail?: string;
   isCancelled: boolean;
   isRegistered: boolean;
-  qrToken?: string;        // present when isRegistered = true
+  qrToken?: string;
   createdAt: string;
 }

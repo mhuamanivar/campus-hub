@@ -125,7 +125,6 @@ export default function AttendanceScannerPage() {
           </p>
         </div>
 
-        {/* Cámara */}
         <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-6">
           <div className="relative bg-slate-900 aspect-video flex items-center justify-center">
             <video
@@ -152,7 +151,6 @@ export default function AttendanceScannerPage() {
               </div>
             )}
 
-            {/* Visor de escaneo */}
             {scanning && !processing && (
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <div className="w-48 h-48 border-4 border-blue-400 rounded-2xl opacity-70">
@@ -187,7 +185,6 @@ export default function AttendanceScannerPage() {
           </div>
         </div>
 
-        {/* Log de resultados */}
         {results.length > 0 && (
           <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6">
             <h2 className="font-bold text-slate-900 mb-4">

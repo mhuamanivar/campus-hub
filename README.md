@@ -63,7 +63,7 @@ campus-hub/
 
 ## Requisitos Previos
 
-- [Node.js 20+](https://nodejs.org/)
+- [Node.js 20+](https://nodejs.org/) — **requerido por Next.js 16**
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - npm 10+
 
@@ -101,7 +101,8 @@ Editar `.env` y completar los valores (ver [Variables de Entorno](#variables-de-
 
 ```bash
 npm install
-npx prisma migrate dev
+npx prisma migrate deploy
+npx prisma generate
 npm run prisma:seed
 npm run start:dev
 ```

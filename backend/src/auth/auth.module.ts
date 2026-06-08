@@ -10,7 +10,7 @@ import { GoogleStrategy } from './strategies/google.strategy';
 @Module({
   imports: [
     PassportModule,
-    JwtModule.register({}), // secrets are passed per-call in AuthService
+    JwtModule.register({}),
   ],
   providers: [AuthService, JwtStrategy, JwtRefreshStrategy, GoogleStrategy],
   controllers: [AuthController],

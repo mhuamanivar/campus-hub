@@ -81,7 +81,6 @@ export default function EventDetail() {
     <DashboardLayout>
       <div className="max-w-4xl mx-auto">
 
-        {/* Volver */}
         <button
           onClick={() => router.back()}
           className="flex items-center gap-2 text-slate-500 hover:text-slate-900 mb-6 transition-colors"
@@ -89,7 +88,6 @@ export default function EventDetail() {
           <ArrowLeft size={18} /> Volver
         </button>
 
-        {/* Banner */}
         <div className="h-64 rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-700 relative overflow-hidden">
           <div className="absolute inset-0 flex items-end p-8">
             <span className="bg-white/20 backdrop-blur text-white text-sm px-4 py-1.5 rounded-full">
@@ -193,13 +191,11 @@ export default function EventDetail() {
             )}
           </div>
 
-          {/* Reacciones */}
           <div className="mt-6 pt-6 border-t border-slate-100">
             <p className="text-sm font-medium text-slate-500 mb-3">Reacciones</p>
             <ReactionBar eventId={id} />
           </div>
 
-          {/* Comentarios */}
           <CommentSection eventId={id} />
 
         </div>
