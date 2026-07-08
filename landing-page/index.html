@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusHub — Toda tu vida universitaria, en un solo lugar</title>
+  <meta name="description" content="CampusHub centraliza eventos, servicios, préstamos y marketplace estudiantil en un solo ecosistema digital para la comunidad universitaria." />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+<body>
+
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a href="#top" class="nav__brand" aria-label="CampusHub — inicio">
+        <img src="assets/logo.svg" alt="CampusHub" height="32" />
+      </a>
+
+      <nav class="nav__links" id="nav-links">
+        <a href="#beneficios">Beneficios</a>
+        <a href="#precios">Precios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <a
+        href="#"
+        class="btn btn--primary btn--sm js-whatsapp-cta"
+        data-cta-location="nav"
+      >
+        Probar gratis
+      </a>
+
+      <button class="nav__toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <span class="eyebrow">Proyecto piloto · UNSA, Arequipa</span>
+          <h1>Toda tu vida universitaria, en un solo lugar.</h1>
+          <p class="hero__lead">
+            Entérate de eventos relevantes, inscríbete con código QR, ofrece o contrata servicios
+            y compra, vende o intercambia en el marketplace de tu campus — sin saltar entre
+            WhatsApp, Instagram y correos institucionales.
+          </p>
+          <div class="hero__actions">
+            <a href="#" class="btn btn--primary btn--lg js-whatsapp-cta" data-cta-location="hero">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.868-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.9.526 3.68 1.443 5.2L2 22l4.933-1.393A9.96 9.96 0 0012.001 22C17.523 22 22 17.523 22 12S17.523 2 12.001 2zm0 18.03a8 8 0 01-4.084-1.115l-.293-.174-2.927.827.85-2.85-.19-.293A8.03 8.03 0 1120 12a8.02 8.02 0 01-7.999 8.03z"/></svg>
+              Escríbenos por WhatsApp
+            </a>
+            <a href="#precios" class="btn btn--ghost btn--lg">Ver planes y precios</a>
+          </div>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <div class="mock-window">
+            <div class="mock-window__bar">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="mock-window__body">
+              <div class="mock-card mock-card--wide">
+                <div class="mock-pill"></div>
+                <div class="mock-line"></div>
+                <div class="mock-line mock-line--short"></div>
+              </div>
+              <div class="mock-row">
+                <div class="mock-card">
+                  <div class="mock-icon">📅</div>
+                  <div class="mock-line"></div>
+                  <div class="mock-line mock-line--short"></div>
+                </div>
+                <div class="mock-card">
+                  <div class="mock-icon">▦</div>
+                  <div class="mock-line"></div>
+                  <div class="mock-line mock-line--short"></div>
+                </div>
+              </div>
+              <div class="mock-card mock-card--chart">
+                <div class="mock-bar" style="--h:40%"></div>
+                <div class="mock-bar" style="--h:70%"></div>
+                <div class="mock-bar" style="--h:55%"></div>
+                <div class="mock-bar" style="--h:90%"></div>
+                <div class="mock-bar" style="--h:65%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFICIOS / CARACTERÍSTICAS -->
+    <section class="section" id="beneficios">
+      <div class="container">
+        <div class="section__head">
+          <span class="eyebrow">Beneficios</span>
+          <h2>Todo lo que tu campus necesita, integrado</h2>
+          <p>CampusHub reemplaza media docena de apps y grupos de WhatsApp con un solo ecosistema digital.</p>
+        </div>
+
+        <div class="features">
+          <article class="feature-card">
+            <div class="feature-card__icon">📅</div>
+            <h3>Feed de Eventos</h3>
+            <p>Descubre y filtra eventos por carrera e intereses, con inscripción en un clic.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon">▦</div>
+            <h3>Asistencia con QR</h3>
+            <p>Control de asistencia en tiempo real: sin listas en papel, sin errores manuales.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon">💼</div>
+            <h3>Servicios y Tutorías</h3>
+            <p>Ofrece o contrata tutorías, diseño y programación entre estudiantes de tu universidad.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon">🛍️</div>
+            <h3>Marketplace</h3>
+            <p>Compra, vende o intercambia productos dentro de tu misma comunidad universitaria.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon">📚</div>
+            <h3>Préstamo de Recursos</h3>
+            <p>Solicita y devuelve materiales académicos desde un catálogo compartido.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon">🔔</div>
+            <h3>Notificaciones</h3>
+            <p>Entérate al instante de inscripciones, comentarios y cambios en tus eventos.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-card__icon">📊</div>
+            <h3>Analítica de Impacto</h3>
+            <p>Organizadores e instituciones miden participación real, no estimaciones.</p>
+          </article>
+        </div>
+
+        <div class="audience">
+          <div class="audience__item">
+            <span class="audience__tag">Estudiante</span>
+            <p>&ldquo;Quiero encontrar y asistir a eventos relevantes para mi carrera sin perder tiempo buscando.&rdquo;</p>
+          </div>
+          <div class="audience__item">
+            <span class="audience__tag">Organizador</span>
+            <p>&ldquo;Quiero gestionar mis eventos, controlar asistencia y medir resultados desde un solo lugar.&rdquo;</p>
+          </div>
+          <div class="audience__item">
+            <span class="audience__tag">Institución</span>
+            <p>&ldquo;Quiero entender qué actividades generan más impacto para mejorar mi oferta académica.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRECIOS -->
+    <section class="section section--alt" id="precios">
+      <div class="container">
+        <div class="section__head">
+          <span class="eyebrow">Modelo de Precios</span>
+          <h2>Un plan para cada rol dentro del campus</h2>
+          <p class="pricing-note">Precios de lanzamiento — en validación como parte de nuestro Producto Mínimo Viable (PMV).</p>
+        </div>
+
+        <div class="pricing">
+          <article class="price-card">
+            <h3>Gratuito</h3>
+            <p class="price-card__audience">Para estudiantes</p>
+            <p class="price-card__price">S/ 0<span>/siempre</span></p>
+            <ul>
+              <li>Feed personalizado de eventos</li>
+              <li>Inscripción e ingreso con QR</li>
+              <li>Acceso a marketplace y servicios</li>
+              <li>Préstamo de recursos académicos</li>
+            </ul>
+            <a href="#contacto" class="btn btn--ghost btn--block js-plan-cta" data-plan="Gratuito">Regístrate gratis</a>
+          </article>
+
+          <article class="price-card">
+            <h3>Premium Básico</h3>
+            <p class="price-card__audience">Para organizadores que inician</p>
+            <p class="price-card__price">S/ 9.90<span>/mes</span></p>
+            <ul>
+              <li>Eventos ilimitados</li>
+              <li>Difusión digital ilimitada</li>
+              <li>Control de asistencia por QR</li>
+              <li>Soporte por correo</li>
+            </ul>
+            <a href="#contacto" class="btn btn--ghost btn--block js-plan-cta" data-plan="Premium Básico">Quiero este plan</a>
+          </article>
+
+          <article class="price-card price-card--highlight">
+            <span class="price-card__badge">Más popular</span>
+            <h3>Premium Pro</h3>
+            <p class="price-card__audience">Para capítulos y clubes activos</p>
+            <p class="price-card__price">S/ 19.90<span>/mes</span></p>
+            <ul>
+              <li>Todo lo de Básico</li>
+              <li>Analítica avanzada de participación</li>
+              <li>Comunicación masiva a inscritos</li>
+              <li>Soporte prioritario 24h</li>
+            </ul>
+            <a href="#contacto" class="btn btn--primary btn--block js-plan-cta" data-plan="Premium Pro">Quiero este plan</a>
+          </article>
+
+          <article class="price-card">
+            <h3>Institucional</h3>
+            <p class="price-card__audience">Para facultades y universidades</p>
+            <p class="price-card__price">S/ 150<span>/mes</span></p>
+            <ul>
+              <li>Analítica institucional y reportes</li>
+              <li>Licenciamiento por facultad o área</li>
+              <li>Acompañamiento dedicado</li>
+              <li>Contrato anual</li>
+            </ul>
+            <a href="#contacto" class="btn btn--ghost btn--block js-plan-cta" data-plan="Institucional">Contactar ventas</a>
+          </article>
+        </div>
+
+        <p class="pricing-footnote">* Adicionalmente, se aplica una comisión del 3% por transacción realizada en el Marketplace.</p>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="section" id="contacto">
+      <div class="container">
+        <div class="section__head">
+          <span class="eyebrow">Contacto</span>
+          <h2>¿Quieres ser parte del piloto en la UNSA?</h2>
+          <p>Escríbenos directo o déjanos tus datos y te contactamos.</p>
+        </div>
+
+        <div class="contact">
+          <div class="contact__whatsapp">
+            <h3>Escríbenos directo</h3>
+            <p>Resolvemos tus dudas y te damos acceso anticipado a CampusHub.</p>
+            <a href="#" class="btn btn--primary btn--lg js-whatsapp-cta" data-cta-location="contacto">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.868-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.9.526 3.68 1.443 5.2L2 22l4.933-1.393A9.96 9.96 0 0012.001 22C17.523 22 22 17.523 22 12S17.523 2 12.001 2zm0 18.03a8 8 0 01-4.084-1.115l-.293-.174-2.927.827.85-2.85-.19-.293A8.03 8.03 0 1120 12a8.02 8.02 0 01-7.999 8.03z"/></svg>
+              Abrir WhatsApp
+            </a>
+          </div>
+
+          <form class="contact__form" id="lead-form" novalidate>
+            <h3>Déjanos tus datos</h3>
+
+            <label class="field">
+              <span>Nombre</span>
+              <input type="text" name="nombre" id="f-nombre" required autocomplete="name" />
+              <small class="field__error" id="e-nombre">Ingresa tu nombre.</small>
+            </label>
+
+            <label class="field">
+              <span>Correo institucional</span>
+              <input type="email" name="correo" id="f-correo" required autocomplete="email" placeholder="tucorreo@unsa.edu.pe" />
+              <small class="field__error" id="e-correo">Ingresa un correo válido.</small>
+            </label>
+
+            <label class="field">
+              <span>Rol</span>
+              <select name="rol" id="f-rol" required>
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="Estudiante">Estudiante</option>
+                <option value="Organizador">Organizador / capítulo estudiantil</option>
+                <option value="Institución">Institución / facultad</option>
+                <option value="Otro">Otro</option>
+              </select>
+              <small class="field__error" id="e-rol">Selecciona una opción.</small>
+            </label>
+
+            <label class="field">
+              <span>Mensaje (opcional)</span>
+              <textarea name="mensaje" id="f-mensaje" rows="3"></textarea>
+            </label>
+
+            <button type="submit" class="btn btn--primary btn--block">Enviar</button>
+
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="assets/logo.svg" alt="CampusHub" height="28" />
+        <p>Plataforma universitaria que centraliza eventos, servicios, préstamos y marketplace estudiantil.</p>
+        <div class="footer__social">
+          <!-- TODO: reemplazar "#" con las URLs reales de las redes -->
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="TikTok">TikTok</a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Producto</h4>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#precios">Precios</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Universidad</h4>
+        <p>Universidad Nacional de San Agustín de Arequipa</p>
+        <p>Facultad de Ingeniería de Sistemas</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <!-- TODO: reemplazar con el correo real de contacto -->
+        <a href="mailto:contacto@campushub.pe">contacto@campushub.pe</a>
+        <a href="#" class="js-whatsapp-cta" data-cta-location="footer">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2026 CampusHub — Proyecto académico, UNSA, Ingeniería de Sistemas.</p>
+      <p>Hecho por Maria Ezcurra &amp; Melsy Huamaní.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
