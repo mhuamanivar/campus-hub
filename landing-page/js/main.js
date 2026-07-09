@@ -71,6 +71,25 @@ if (benefitCarousel) {
   });
 }
 
+// Track each section's first appearance in the viewport (fires once per section).
+const trackedSections = new Set();
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !trackedSections.has(entry.target)) {
+        trackedSections.add(entry.target);
+        track("view_section", { section_name: entry.target.dataset.sectionName });
+        sectionObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.5 }
+);
+
+document.querySelectorAll("[data-section-name]").forEach((section) => {
+  sectionObserver.observe(section);
+});
+
 // Mobile nav toggle.
 const navToggle = document.getElementById("nav-toggle");
 const navLinks = document.getElementById("nav-links");

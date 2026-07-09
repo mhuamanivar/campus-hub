@@ -71,7 +71,7 @@
 
   <main>
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" data-section-name="Hero">
       <div class="container hero__inner">
         <div class="hero__copy">
           <span class="eyebrow">Plataforma universitaria</span>
@@ -110,7 +110,7 @@
     </section>
 
     <!-- STATS STRIP -->
-    <section class="stats">
+    <section class="stats" data-section-name="Estadísticas">
       <div class="container">
         <p class="stats__caption">El mercado que buscamos transformar</p>
         <div class="stats__inner">
@@ -135,7 +135,7 @@
     </section>
 
     <!-- CÓMO FUNCIONA -->
-    <section class="section section--alt" id="como-funciona">
+    <section class="section section--alt" id="como-funciona" data-section-name="Cómo funciona">
       <div class="container">
         <div class="section__head">
           <span class="eyebrow">Cómo funciona</span>
@@ -163,7 +163,7 @@
     </section>
 
     <!-- BENEFICIOS / CARACTERÍSTICAS -->
-    <section class="section" id="beneficios">
+    <section class="section" id="beneficios" data-section-name="Beneficios">
       <div class="container">
         <div class="section__head">
           <span class="eyebrow">Beneficios</span>
@@ -287,8 +287,44 @@
       </div>
     </section>
 
+    <!-- ACCESO A LA PLATAFORMA -->
+    <section class="section section--alt" id="acceso" data-section-name="Acceso">
+      <div class="container access__inner">
+        <div class="access__copy">
+          <span class="eyebrow">Únete a CampusHub</span>
+          <h2>Ingresa a CampusHub con tu correo institucional</h2>
+          <p>Accede a tu cuenta y descubre eventos, servicios, préstamos y el marketplace de tu campus, todo en un solo lugar.</p>
+          <a href="#" class="btn btn--primary btn--lg js-whatsapp-cta" data-cta-location="acceso-app">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+            Ingresar a CampusHub
+          </a>
+          <p class="access__hint">¿Primera vez? <a href="#contacto">Escríbenos</a> y te ayudamos a crear tu cuenta.</p>
+        </div>
+
+        <div class="access__mock" aria-hidden="true">
+          <div class="access__mock-window">
+            <div class="access__mock-bar">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="access__mock-body">
+              <span class="access__mock-brand">Campus<em>Hub</em></span>
+              <div class="access__mock-field">
+                Correo institucional
+                <span class="access__mock-input">tucorreo@unsa.edu.pe</span>
+              </div>
+              <div class="access__mock-field">
+                Contraseña
+                <span class="access__mock-input">••••••••</span>
+              </div>
+              <span class="access__mock-button">Ingresar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- PRECIOS -->
-    <section class="section section--alt" id="precios">
+    <section class="section section--alt" id="precios" data-section-name="Precios">
       <div class="container">
         <div class="section__head">
           <span class="eyebrow">Modelo de Precios</span>
@@ -356,7 +392,7 @@
     </section>
 
     <!-- CONTACTO -->
-    <section class="section" id="contacto">
+    <section class="section" id="contacto" data-section-name="Contacto">
       <div class="container">
         <div class="section__head">
           <span class="eyebrow">Contacto</span>
