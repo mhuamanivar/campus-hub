@@ -44,7 +44,6 @@ peticiones desde `file://`).
 
 | Dato | Dónde | Qué hacer |
 |------|-------|-----------|
-| Measurement ID de GA4 | `index.html`, dos apariciones de `G-XXXXXXXXXX` en el `<head>` | Reemplazar con el ID real que entregue Persona 2 |
 | Número de WhatsApp | `js/main.js`, constante `WHATSAPP_NUMBER` | Reemplazar con el número real (código de país + número, sin símbolos) |
 | Endpoint del formulario | `js/main.js`, constante `FORMSPREE_ENDPOINT` | Crear un formulario gratis en [formspree.io](https://formspree.io) y pegar la URL que te den |
 | Redes sociales | `index.html`, sección `<footer>`, enlaces marcados con `TODO` | Reemplazar los `href="#"` con las URLs reales |

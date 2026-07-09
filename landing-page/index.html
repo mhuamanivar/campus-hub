@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
   <title>CampusHub — Toda tu vida universitaria, en un solo lugar</title>
   <meta name="description" content="CampusHub centraliza eventos, servicios, préstamos y marketplace estudiantil en un solo ecosistema digital para la comunidad universitaria." />
 
@@ -12,12 +13,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <!-- Apply the stored/system theme before first paint, to avoid a flash of the wrong theme -->
+  <script>
+    (function () {
+      var stored = localStorage.getItem("campushub-theme");
+      var theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZX1G8964BZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
+    gtag('config', 'G-ZX1G8964BZ');
   </script>
 </head>
 <body>
@@ -33,6 +43,11 @@
         <a href="#precios">Precios</a>
         <a href="#contacto">Contacto</a>
       </nav>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar a tema oscuro" aria-pressed="false">
+        <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12h2.6M18.9 12h2.6M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+        <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.3A8.3 8.3 0 1 1 9.7 4a6.6 6.6 0 0 0 10.3 10.3z"/></svg>
+      </button>
 
       <a
         href="#"
@@ -53,7 +68,7 @@
     <section class="hero">
       <div class="container hero__inner">
         <div class="hero__copy">
-          <span class="eyebrow">Proyecto piloto · UNSA, Arequipa</span>
+          <span class="eyebrow">Plataforma universitaria</span>
           <h1>Toda tu vida universitaria, en un solo lugar.</h1>
           <p class="hero__lead">
             Entérate de eventos relevantes, inscríbete con código QR, ofrece o contrata servicios
@@ -70,36 +85,68 @@
         </div>
 
         <div class="hero__visual" aria-hidden="true">
-          <div class="mock-window">
-            <div class="mock-window__bar">
-              <span></span><span></span><span></span>
+          <article class="proof-card proof-card--event">
+            <span class="proof-card__tag">Tecnología</span>
+            <h4>Hackathon UNSA 2026</h4>
+            <p class="proof-card__meta-line">15 ago · Auditorio FIS</p>
+            <div class="proof-card__meta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><path d="M14 14h3v3h-3zM20 14v3M17 20h3"/></svg>
+              128 inscritos
             </div>
-            <div class="mock-window__body">
-              <div class="mock-card mock-card--wide">
-                <div class="mock-pill"></div>
-                <div class="mock-line"></div>
-                <div class="mock-line mock-line--short"></div>
-              </div>
-              <div class="mock-row">
-                <div class="mock-card">
-                  <div class="mock-icon">📅</div>
-                  <div class="mock-line"></div>
-                  <div class="mock-line mock-line--short"></div>
-                </div>
-                <div class="mock-card">
-                  <div class="mock-icon">▦</div>
-                  <div class="mock-line"></div>
-                  <div class="mock-line mock-line--short"></div>
-                </div>
-              </div>
-              <div class="mock-card mock-card--chart">
-                <div class="mock-bar" style="--h:40%"></div>
-                <div class="mock-bar" style="--h:70%"></div>
-                <div class="mock-bar" style="--h:55%"></div>
-                <div class="mock-bar" style="--h:90%"></div>
-                <div class="mock-bar" style="--h:65%"></div>
-              </div>
-            </div>
+          </article>
+          <article class="proof-card proof-card--stat">
+            <span class="proof-card__stat-num">92%</span>
+            <span class="proof-card__stat-label">Asistencia confirmada por QR</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS STRIP -->
+    <section class="stats">
+      <div class="container stats__inner">
+        <div class="stat">
+          <span class="stat__num">70,000+</span>
+          <span class="stat__label">Estudiantes activos en la UNSA</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num">17</span>
+          <span class="stat__label">Facultades</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num">7</span>
+          <span class="stat__label">Módulos integrados en un solo lugar</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num">100%</span>
+          <span class="stat__label">Acceso con correo institucional</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section class="section section--alt" id="como-funciona">
+      <div class="container">
+        <div class="section__head">
+          <span class="eyebrow">Cómo funciona</span>
+          <h2>De tu correo institucional a tu primer evento, en minutos</h2>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <span class="step__num">01</span>
+            <h3>Regístrate</h3>
+            <p>Ingresa con tu correo institucional UNSA. Sin formularios eternos ni verificación manual.</p>
+          </div>
+          <div class="step">
+            <span class="step__num">02</span>
+            <h3>Explora y participa</h3>
+            <p>Eventos, servicios, marketplace y préstamos filtrados por tu carrera e intereses.</p>
+          </div>
+          <div class="step">
+            <span class="step__num">03</span>
+            <h3>Mide tu impacto</h3>
+            <p>Organizadores e instituciones acceden a analítica real de participación, no estimaciones.</p>
           </div>
         </div>
       </div>
@@ -114,42 +161,103 @@
           <p>CampusHub reemplaza media docena de apps y grupos de WhatsApp con un solo ecosistema digital.</p>
         </div>
 
-        <div class="features">
-          <article class="feature-card">
-            <div class="feature-card__icon">📅</div>
-            <h3>Feed de Eventos</h3>
-            <p>Descubre y filtra eventos por carrera e intereses, con inscripción en un clic.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-card__icon">▦</div>
-            <h3>Asistencia con QR</h3>
-            <p>Control de asistencia en tiempo real: sin listas en papel, sin errores manuales.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-card__icon">💼</div>
-            <h3>Servicios y Tutorías</h3>
-            <p>Ofrece o contrata tutorías, diseño y programación entre estudiantes de tu universidad.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-card__icon">🛍️</div>
-            <h3>Marketplace</h3>
-            <p>Compra, vende o intercambia productos dentro de tu misma comunidad universitaria.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-card__icon">📚</div>
-            <h3>Préstamo de Recursos</h3>
-            <p>Solicita y devuelve materiales académicos desde un catálogo compartido.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-card__icon">🔔</div>
-            <h3>Notificaciones</h3>
-            <p>Entérate al instante de inscripciones, comentarios y cambios en tus eventos.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-card__icon">📊</div>
-            <h3>Analítica de Impacto</h3>
-            <p>Organizadores e instituciones miden participación real, no estimaciones.</p>
-          </article>
+        <div class="benefit-carousel" id="benefit-carousel">
+          <button class="benefit-nav benefit-nav--prev" id="benefit-prev" aria-label="Beneficio anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+
+          <div class="benefit-viewport">
+            <article class="benefit-slide is-active" data-index="0">
+              <div class="benefit-slide__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M8 2.5v4M16 2.5v4M3 9.5h18"/></svg>
+              </div>
+              <div class="benefit-slide__text">
+                <h3>Feed de Eventos</h3>
+                <p>Descubre y filtra eventos por carrera e intereses, con inscripción en un clic.</p>
+                <span class="benefit-slide__index">01 / 07</span>
+              </div>
+            </article>
+
+            <article class="benefit-slide" data-index="1">
+              <div class="benefit-slide__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H4.5a1.5 1.5 0 0 0-1.5 1.5V7M17 3h2.5A1.5 1.5 0 0 1 21 4.5V7M7 21H4.5A1.5 1.5 0 0 1 3 19.5V17M17 21h2.5a1.5 1.5 0 0 0 1.5-1.5V17"/><rect x="9" y="9" width="6" height="6" rx="0.5"/></svg>
+              </div>
+              <div class="benefit-slide__text">
+                <h3>Asistencia con QR</h3>
+                <p>Control de asistencia en tiempo real: sin listas en papel, sin errores manuales.</p>
+                <span class="benefit-slide__index">02 / 07</span>
+              </div>
+            </article>
+
+            <article class="benefit-slide" data-index="2">
+              <div class="benefit-slide__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8.5 7V5.5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2V7M2.5 12h19"/></svg>
+              </div>
+              <div class="benefit-slide__text">
+                <h3>Servicios y Tutorías</h3>
+                <p>Ofrece o contrata tutorías, diseño y programación entre estudiantes de tu universidad.</p>
+                <span class="benefit-slide__index">03 / 07</span>
+              </div>
+            </article>
+
+            <article class="benefit-slide" data-index="3">
+              <div class="benefit-slide__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 7h11l1 13.5a1.5 1.5 0 0 1-1.5 1.5h-10a1.5 1.5 0 0 1-1.5-1.5z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg>
+              </div>
+              <div class="benefit-slide__text">
+                <h3>Marketplace</h3>
+                <p>Compra, vende o intercambia productos dentro de tu misma comunidad universitaria.</p>
+                <span class="benefit-slide__index">04 / 07</span>
+              </div>
+            </article>
+
+            <article class="benefit-slide" data-index="4">
+              <div class="benefit-slide__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20.5a2 2 0 0 1 2-2h5v-16h-5a2 2 0 0 0-2 2z"/><path d="M20 20.5a2 2 0 0 0-2-2h-5v-16h5a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="benefit-slide__text">
+                <h3>Préstamo de Recursos</h3>
+                <p>Solicita y devuelve materiales académicos desde un catálogo compartido.</p>
+                <span class="benefit-slide__index">05 / 07</span>
+              </div>
+            </article>
+
+            <article class="benefit-slide" data-index="5">
+              <div class="benefit-slide__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5a6 6 0 0 1 12 0c0 5 2 6.5 2 6.5H4s2-1.5 2-6.5z"/><path d="M9.5 18.5a2.5 2.5 0 0 0 5 0"/></svg>
+              </div>
+              <div class="benefit-slide__text">
+                <h3>Notificaciones</h3>
+                <p>Entérate al instante de inscripciones, comentarios y cambios en tus eventos.</p>
+                <span class="benefit-slide__index">06 / 07</span>
+              </div>
+            </article>
+
+            <article class="benefit-slide" data-index="6">
+              <div class="benefit-slide__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20.5V13M4 20.5h16M10 20.5V7M16 20.5v-9.5"/></svg>
+              </div>
+              <div class="benefit-slide__text">
+                <h3>Analítica de Impacto</h3>
+                <p>Organizadores e instituciones miden participación real, no estimaciones.</p>
+                <span class="benefit-slide__index">07 / 07</span>
+              </div>
+            </article>
+          </div>
+
+          <button class="benefit-nav benefit-nav--next" id="benefit-next" aria-label="Siguiente beneficio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="benefit-progress" id="benefit-progress">
+          <button class="benefit-dot is-active" data-index="0" aria-label="Ir al beneficio 1"></button>
+          <button class="benefit-dot" data-index="1" aria-label="Ir al beneficio 2"></button>
+          <button class="benefit-dot" data-index="2" aria-label="Ir al beneficio 3"></button>
+          <button class="benefit-dot" data-index="3" aria-label="Ir al beneficio 4"></button>
+          <button class="benefit-dot" data-index="4" aria-label="Ir al beneficio 5"></button>
+          <button class="benefit-dot" data-index="5" aria-label="Ir al beneficio 6"></button>
+          <button class="benefit-dot" data-index="6" aria-label="Ir al beneficio 7"></button>
         </div>
 
         <div class="audience">
@@ -206,7 +314,7 @@
           </article>
 
           <article class="price-card price-card--highlight">
-            <span class="price-card__badge">Más popular</span>
+            <span class="price-card__badge">Recomendado</span>
             <h3>Premium Pro</h3>
             <p class="price-card__audience">Para capítulos y clubes activos</p>
             <p class="price-card__price">S/ 19.90<span>/mes</span></p>
@@ -242,7 +350,7 @@
       <div class="container">
         <div class="section__head">
           <span class="eyebrow">Contacto</span>
-          <h2>¿Quieres ser parte del piloto en la UNSA?</h2>
+          <h2>Sé parte de CampusHub</h2>
           <p>Escríbenos directo o déjanos tus datos y te contactamos.</p>
         </div>
 
@@ -332,7 +440,7 @@
 
     <div class="footer__bottom">
       <p>© 2026 CampusHub — Proyecto académico, UNSA, Ingeniería de Sistemas.</p>
-      <p>Hecho por Maria Ezcurra &amp; Melsy Huamaní.</p>
+      <p>Hecho por UniHub Developers.</p>
     </div>
   </footer>
 
