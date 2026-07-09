@@ -54,29 +54,20 @@ if (benefitCarousel) {
   const nextBtn = document.getElementById("benefit-next");
   let current = 0;
 
-  function showSlide(index, direction) {
-    const nextIndex = (index + slides.length) % slides.length;
-    const dir = direction || (nextIndex < current ? "prev" : "next");
-
-    slides[current].classList.remove("is-active", "enter-next", "enter-prev");
-    current = nextIndex;
-
-    const activeSlide = slides[current];
-    activeSlide.classList.remove("enter-next", "enter-prev");
-    activeSlide.getBoundingClientRect(); // force a reflow so the CSS animation restarts reliably
-    activeSlide.classList.add("is-active", dir === "prev" ? "enter-prev" : "enter-next");
-
+  function showSlide(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => slide.classList.toggle("is-active", i === current));
     dots.forEach((dot, i) => dot.classList.toggle("is-active", i === current));
   }
 
-  prevBtn.addEventListener("click", () => showSlide(current - 1, "prev"));
-  nextBtn.addEventListener("click", () => showSlide(current + 1, "next"));
+  prevBtn.addEventListener("click", () => showSlide(current - 1));
+  nextBtn.addEventListener("click", () => showSlide(current + 1));
   dots.forEach((dot, i) => dot.addEventListener("click", () => showSlide(i)));
 
   benefitCarousel.setAttribute("tabindex", "0");
   benefitCarousel.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowRight") showSlide(current + 1, "next");
-    if (event.key === "ArrowLeft") showSlide(current - 1, "prev");
+    if (event.key === "ArrowRight") showSlide(current + 1);
+    if (event.key === "ArrowLeft") showSlide(current - 1);
   });
 }
 
